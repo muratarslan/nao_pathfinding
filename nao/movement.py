@@ -4,28 +4,37 @@ import time
 from gi.repository import Gtk
 from naoqi import ALProxy
 
+import config as c
 
-IP = "10.51.5.167"
-PORT = 9559
-
-
-try:
-	tts         = ALProxy("ALTextToSpeech", IP, PORT)
-	motion  = ALProxy("ALMotion", IP, PORT)
-	posture = ALProxy("ALRobotPosture", IP, PORT)
-	photo    = ALProxy("ALPhotoCapture", IP, PORT)
-except Exception, e:
-	print "Error"
-	print str(e)
-	exit(1)
+tts     = ALProxy("ALTextToSpeech", c.IP, c.PORT)
+motion  = ALProxy("ALMotion", c.IP, c.PORT)
+posture = ALProxy("ALRobotPosture", c.IP, c.PORT)
+photo   = ALProxy("ALPhotoCapture", c.IP, c.PORT)
 
 
 class NaoController:
+        
+        """Represents Nao Controller GUI
 
-	def __init__(self):
-            pass
+        params: glade_file_path - path:string
+        """
+	def __init__(self, glade_file_path=c.GLADE_FILE_PATH):
+            self.glade_file_path = glade_file_path
+            
+            # Gtk Builder Init
+            self.builder = Gtk.Builder()
+            self.builder.add_from_file(self.glade_file_path)
+            self.builder.connect_signals(self)
 
-#### Nao Posture Functions
+            # Add UI Components
+            self.window = self.builder.get_object("naoControllerWindow")
+            self.speechbox = self.builder.get_object("speechbox")
+
+            # Show UI
+            self.window.show_all()
+
+
+        #### Nao Posture Functions
 	def naoStandInit(self, widget):
 	    posture.goToPosture("StandInit", 1.0)
             print "Stand Init"
@@ -58,10 +67,7 @@ class NaoController:
 	    posture.goToPosture("Sit", 1.0)
             print "Sit"
 
-
-
-
-#### Nao Motion Functions
+        #### Nao Motion Functions
 	def naoEnough(self, widget):
 	    motion.moveInit()
             motion.post.wakeUp()
@@ -101,12 +107,9 @@ class NaoController:
             print "Taking Photo"
 
         def naoSay(self, widget):
-            tts.say(entry.get_text())
-            print entry.get_text()
+            tts.say(self.speechbox.get_text())
+            print "Say: %s" % self.speechbox.get_text()
 
         def destroy(self, widget):
             print "destroyed"
             Gtk.main_quit()
-
-
-

@@ -3,5 +3,5 @@ dist
 *~
 *#
 .#*
-.pyc
+*.pyc
 .glade~

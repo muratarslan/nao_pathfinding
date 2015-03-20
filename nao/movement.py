@@ -100,12 +100,6 @@ class NaoController:
             motion.moveTo(0, -10, 0)
             print "Right"
 
-	def naoPhoto(self, widget):
-	    photo.setResolution(1)
-	    photo.setPictureFormat("jpg")
-            photo.takePictures(3,"/tmp/nao", "image")
-            print "Taking Photo"
-
         def naoSay(self, widget):
             tts.say(self.speechbox.get_text())
             print "Say: %s" % self.speechbox.get_text()

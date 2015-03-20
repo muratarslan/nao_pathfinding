@@ -2,18 +2,15 @@
 import Image
 import cv
 from naoqi import ALProxy
+import config as c
 
 
-def showImage(IP, PORT,cameraId):
-  cameraProxy = ALProxy("ALVideoDevice", IP, PORT)
-  cameraProxy.kCameraSelectID=18
-  cameraProxy.setParam(cameraProxy.kCameraSelectID,cameraId)
+def showImage():
+  cameraProxy = ALProxy("ALVideoDevice", c.IP, c.PORT)
+  cameraProxy.kCameraSelectID = c.CAMERAID
+  cameraProxy.setParam(cameraProxy.kCameraSelectID,c.CAMERAID)
 
-  
-  resolution =  2   # Image Size
-  colorSpace = 11   # Select RGB
-
-  videoClient = cameraProxy.subscribe("python_client", resolution, colorSpace, 5)
+  videoClient = cameraProxy.subscribe("python_client", c.RESOLUTION, c.COLORSPACE, 5)
 
   # image[6] contains ASCII
   naoImage = cameraProxy.getImageRemote(videoClient)
@@ -40,8 +37,6 @@ def showImage(IP, PORT,cameraId):
 
 
 if __name__ == '__main__':
-  IP = "10.51.5.167"  # Nao IP Address
-  PORT = 9559
-  showImage(IP, PORT,18)
+  showImage()
 
 

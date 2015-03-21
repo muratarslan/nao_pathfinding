@@ -107,3 +107,11 @@ class NaoController:
         def destroy(self, widget):
             print "destroyed"
             Gtk.main_quit()
+
+        def keyPressed(self, widget, event):
+            key_code = event.get_keycode()[1]
+            print "keyPressed: %s" % key_code 
+
+        def keyReleased(self, widget, event):
+            key_code = event.get_keycode()[1]
+            print "keyReleased: %s" % key_code

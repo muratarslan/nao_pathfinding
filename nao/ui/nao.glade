@@ -7,6 +7,8 @@
     <property name="window_position">center-always</property>
     <signal name="destroy" handler="destroy" swapped="no"/>
     <signal name="destroy-event" handler="destroy" swapped="no"/>
+    <signal name="key-press-event" handler="keyPressed" swapped="no"/>
+    <signal name="key-press-event" handler="keyReleased" swapped="no"/>
     <child>
       <object class="GtkGrid" id="grid1">
         <property name="visible">True</property>

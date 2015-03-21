@@ -108,8 +108,31 @@ class NaoController:
             print "destroyed"
             Gtk.main_quit()
 
+            ## Key Pressed Event to control Nao remotely
         def keyPressed(self, widget, event):
             key_code = event.get_keycode()[1]
+            if key_code == 111:  # UP Nao Forward
+                    motion.moveInit()
+                    motion.walkTo(0.1, 0, 0)
+            if key_code == 116: # Down Nao Backward
+                    motion.moveInit()
+                    motion.moveTo(-0.1, 0, 0)
+            if key_code == 113: # Left Nao Left
+                    motion.moveInit()
+                    motion.moveTo(0, 0.1, 0)
+            if key_code == 114: # Right Nao Right
+                    motion.moveInit()
+                    motion.moveTo(0, -0.1, 0)
+            if key_code == 38: # a Turn Left
+                    motion.moveInit()
+                    motion.moveTo(0, 0, 1)
+            if key_code == 40: # d Turn Right
+                    motion.moveInit()
+                    motion.moveTo(0, 0, -1)
+            if key_code == 25: # w Head Up
+                    motion.angleInterpolation("HeadPitch", 0.5, 1, True)
+            if key_code == 39: # s Head Down
+                    motion.angleInterpolation("HeadPitch", -0.5, 1, True)
             print "keyPressed: %s" % key_code 
 
         def keyReleased(self, widget, event):

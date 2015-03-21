@@ -10,6 +10,7 @@ def showImage():
   cameraProxy.kCameraSelectID = c.CAMERAID
   cameraProxy.setParam(cameraProxy.kCameraSelectID,c.CAMERAID)
 
+
   videoClient = cameraProxy.subscribe("python_client", c.RESOLUTION, c.COLORSPACE, 5)
 
   # image[6] contains ASCII

@@ -5,6 +5,7 @@ from gi.repository import Gtk
 from naoqi import ALProxy
 
 import config as c
+import photo  as p
 
 tts        = ALProxy("ALTextToSpeech", c.IP, c.PORT)
 motion     = ALProxy("ALMotion", c.IP, c.PORT)
@@ -149,3 +150,6 @@ class NaoController:
         def keyReleased(self, widget, event):
             key_code = event.get_keycode()[1]
             #print "keyReleased: %s" % key_code
+
+        def takePhoto(self, widget):
+           p.showImage()

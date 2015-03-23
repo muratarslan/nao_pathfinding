@@ -101,68 +101,6 @@
           </packing>
         </child>
         <child>
-          <object class="GtkButton" id="leftButton">
-            <property name="label" translatable="yes">Left</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
-            <signal name="clicked" handler="naoLeft" swapped="no"/>
-          </object>
-          <packing>
-            <property name="left_attach">6</property>
-            <property name="top_attach">8</property>
-            <property name="width">1</property>
-            <property name="height">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkButton" id="backButton">
-            <property name="label" translatable="yes">Back</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
-            <property name="xalign">0.49000000953674316</property>
-            <signal name="clicked" handler="naoBackward" swapped="no"/>
-          </object>
-          <packing>
-            <property name="left_attach">7</property>
-            <property name="top_attach">8</property>
-            <property name="width">1</property>
-            <property name="height">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkButton" id="forwardButton">
-            <property name="label" translatable="yes">Forward</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
-            <property name="xalign">0.47999998927116394</property>
-            <signal name="clicked" handler="naoForward" swapped="no"/>
-          </object>
-          <packing>
-            <property name="left_attach">7</property>
-            <property name="top_attach">7</property>
-            <property name="width">1</property>
-            <property name="height">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkButton" id="rightButton">
-            <property name="label" translatable="yes">Right</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
-            <signal name="clicked" handler="naoRight" swapped="no"/>
-          </object>
-          <packing>
-            <property name="left_attach">8</property>
-            <property name="top_attach">8</property>
-            <property name="width">1</property>
-            <property name="height">1</property>
-          </packing>
-        </child>
-        <child>
           <object class="GtkLabel" id="label6">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
@@ -280,10 +218,29 @@
               <placeholder/>
             </child>
             <child>
-              <placeholder/>
+              <object class="GtkLabel" id="label14">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">p : Protection</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">6</property>
+              </packing>
             </child>
             <child>
-              <placeholder/>
+              <object class="GtkLabel" id="label10">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">w : Head Up</property>
+                <property name="ellipsize">start</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">7</property>
+              </packing>
             </child>
           </object>
           <packing>
@@ -362,10 +319,28 @@
               <placeholder/>
             </child>
             <child>
-              <placeholder/>
+              <object class="GtkLabel" id="label13">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">s : Head Down</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">6</property>
+              </packing>
             </child>
             <child>
-              <placeholder/>
+              <object class="GtkLabel" id="label11">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">a : Turn Left</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">7</property>
+              </packing>
             </child>
           </object>
           <packing>
@@ -442,15 +417,86 @@
               <placeholder/>
             </child>
             <child>
-              <placeholder/>
+              <object class="GtkLabel" id="label12">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">d : Turn Right</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">6</property>
+              </packing>
             </child>
             <child>
-              <placeholder/>
+              <object class="GtkLabel" id="label19">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">d : Turn Right</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">7</property>
+              </packing>
             </child>
           </object>
           <packing>
             <property name="left_attach">5</property>
             <property name="top_attach">6</property>
+            <property name="width">1</property>
+            <property name="height">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label15">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Forward
+</property>
+          </object>
+          <packing>
+            <property name="left_attach">6</property>
+            <property name="top_attach">7</property>
+            <property name="width">1</property>
+            <property name="height">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label17">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">    Left    </property>
+          </object>
+          <packing>
+            <property name="left_attach">5</property>
+            <property name="top_attach">8</property>
+            <property name="width">1</property>
+            <property name="height">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label18">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">    Right    </property>
+          </object>
+          <packing>
+            <property name="left_attach">7</property>
+            <property name="top_attach">8</property>
+            <property name="width">1</property>
+            <property name="height">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label16">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Backward</property>
+          </object>
+          <packing>
+            <property name="left_attach">6</property>
+            <property name="top_attach">8</property>
             <property name="width">1</property>
             <property name="height">1</property>
           </packing>

@@ -6,11 +6,15 @@ from naoqi import ALProxy
 
 import config as c
 
-tts     = ALProxy("ALTextToSpeech", c.IP, c.PORT)
-motion  = ALProxy("ALMotion", c.IP, c.PORT)
-posture = ALProxy("ALRobotPosture", c.IP, c.PORT)
-photo   = ALProxy("ALPhotoCapture", c.IP, c.PORT)
+tts        = ALProxy("ALTextToSpeech", c.IP, c.PORT)
+motion     = ALProxy("ALMotion", c.IP, c.PORT)
+posture    = ALProxy("ALRobotPosture", c.IP, c.PORT)
+photo      = ALProxy("ALPhotoCapture", c.IP, c.PORT)
+#navigation = ALProxy("ALNavigation", c.IP, c.PORT)
+
 headposition = 0
+protection   = 0
+
 
 class NaoController:
         
@@ -79,26 +83,7 @@ class NaoController:
 	    tts.say("Charge me")
 	    print "Rest"
     
-        def naoForward(self, widget):
-	    motion.moveInit()
-            motion.walkTo(10, 0, 0)
-	    print "Forward"
-
-	def naoBackward(self, widget):
-	    motion.moveInit()
-            motion.moveTo(-10, 0, 0)
-            print "Backward"
-
-	def naoLeft(self, widget):
-	    motion.moveInit()
-            motion.moveTo(0, 10, 0)
-            print "Left"
-
-	def naoRight(self, widget):
-	    motion.moveInit()
-            motion.moveTo(0, -10, 0)
-            print "Right"
-
+        
         def naoSay(self, widget):
             tts.say(self.speechbox.get_text())
             print "Say: %s" % self.speechbox.get_text()
@@ -110,39 +95,57 @@ class NaoController:
             ## Key Pressed Event to control Nao remotely
         def keyPressed(self, widget, event):
             global headposition
+            global protection
+
             key_code = event.get_keycode()[1]
+            if key_code == 33:  # P Protection On / Off
+                    if protection == 0:
+                            motion.setExternalCollisionProtectionEnabled( "All", False )
+                            protection = 1
+                            print "Protection Off"
+                    else:
+                            motion.setExternalCollisionProtectionEnabled( "All", True )
+                            protection = 0
+                            print "Protection On"
             if key_code == 111:  # UP Nao Forward
+                    print "Moving Forward..."
                     motion.moveInit()
                     motion.walkTo(0.1, 0, 0)
             if key_code == 116: # Down Nao Backward
+                    print "Moving Backward..."
                     motion.moveInit()
                     motion.moveTo(-0.1, 0, 0)
             if key_code == 113: # Left Nao Left
+                    print "Moving Left..."
                     motion.moveInit()
                     motion.moveTo(0, 0.1, 0)
             if key_code == 114: # Right Nao Right
+                    print "Moving Right..."
                     motion.moveInit()
                     motion.moveTo(0, -0.1, 0)
             if key_code == 38: # a Turn Left
+                    print "Turning Left..."
                     motion.moveInit()
                     motion.moveTo(0, 0, 1)
             if key_code == 40: # d Turn Right
+                    print "Turning Right..."
                     motion.moveInit()
                     motion.moveTo(0, 0, -1)
-            if key_code == 25: # w Head Up
+            if key_code == 25: # w Head Down
                     headposition = headposition + 0.1
                     motion.angleInterpolation("HeadPitch", headposition, 0.5, True)
                     if headposition > 0.5:
                             headposition = 0.5
-                    print "Head Position %s" % headposition
-            if key_code == 39: # s Head Down
+                    print "Head Position: %s" % headposition
+            if key_code == 39: # s Head UP
                     headposition = headposition - 0.1
                     motion.angleInterpolation("HeadPitch", headposition, 0.5, True)
                     if headposition < -0.5:
                             headposition = -0.5
-                    print "Head Position %s" % headposition
-                    print "keyPressed: %s" % key_code 
+                    print "Head Position: %s" % headposition
+
+            #print "keyPressed: %s" % key_code 
 
         def keyReleased(self, widget, event):
             key_code = event.get_keycode()[1]
-            print "keyReleased: %s" % key_code
+            #print "keyReleased: %s" % key_code

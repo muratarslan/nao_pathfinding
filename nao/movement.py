@@ -10,7 +10,7 @@ tts     = ALProxy("ALTextToSpeech", c.IP, c.PORT)
 motion  = ALProxy("ALMotion", c.IP, c.PORT)
 posture = ALProxy("ALRobotPosture", c.IP, c.PORT)
 photo   = ALProxy("ALPhotoCapture", c.IP, c.PORT)
-
+headposition = 0
 
 class NaoController:
         
@@ -32,8 +32,7 @@ class NaoController:
 
             # Show UI
             self.window.show_all()
-
-
+   
         #### Nao Posture Functions
 	def naoStandInit(self, widget):
 	    posture.goToPosture("StandInit", 1.0)
@@ -110,6 +109,7 @@ class NaoController:
 
             ## Key Pressed Event to control Nao remotely
         def keyPressed(self, widget, event):
+            global headposition
             key_code = event.get_keycode()[1]
             if key_code == 111:  # UP Nao Forward
                     motion.moveInit()
@@ -130,10 +130,18 @@ class NaoController:
                     motion.moveInit()
                     motion.moveTo(0, 0, -1)
             if key_code == 25: # w Head Up
-                    motion.angleInterpolation("HeadPitch", 0.5, 1, True)
+                    headposition = headposition + 0.1
+                    motion.angleInterpolation("HeadPitch", headposition, 0.5, True)
+                    if headposition > 0.5:
+                            headposition = 0.5
+                    print "Head Position %s" % headposition
             if key_code == 39: # s Head Down
-                    motion.angleInterpolation("HeadPitch", -0.5, 1, True)
-            print "keyPressed: %s" % key_code 
+                    headposition = headposition - 0.1
+                    motion.angleInterpolation("HeadPitch", headposition, 0.5, True)
+                    if headposition < -0.5:
+                            headposition = -0.5
+                    print "Head Position %s" % headposition
+                    print "keyPressed: %s" % key_code 
 
         def keyReleased(self, widget, event):
             key_code = event.get_keycode()[1]

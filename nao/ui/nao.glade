@@ -464,8 +464,8 @@
           </packing>
         </child>
         <child>
-          <object class="GtkButton" id="button4">
-            <property name="label" translatable="yes">button</property>
+          <object class="GtkButton" id="grayImage">
+            <property name="label" translatable="yes">Gray Image</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
@@ -478,11 +478,12 @@
           </packing>
         </child>
         <child>
-          <object class="GtkButton" id="button7">
-            <property name="label" translatable="yes">button</property>
+          <object class="GtkButton" id="cropImage">
+            <property name="label" translatable="yes">Crop Image</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
+            <signal name="clicked" handler="cropImage" swapped="no"/>
           </object>
           <packing>
             <property name="left_attach">0</property>

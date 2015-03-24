@@ -38,7 +38,7 @@ class NaoController:
             # Show UI
             self.window.show_all()
    
-        #### Nao Posture Functions
+        ### Nao Posture Functions
 	def naoStandInit(self, widget):
 	    posture.goToPosture("StandInit", 1.0)
             print "Stand Init"
@@ -71,7 +71,7 @@ class NaoController:
 	    posture.goToPosture("Sit", 1.0)
             print "Sit"
 
-        #### Nao Motion Functions
+        ### Nao Motion Functions
 	def naoEnough(self, widget):
 	    motion.moveInit()
             motion.post.wakeUp()
@@ -84,21 +84,31 @@ class NaoController:
 	    tts.say("Charge me")
 	    print "Rest"
     
-        
+        ### Text to Speech 
         def naoSay(self, widget):
             tts.say(self.speechbox.get_text())
             print "Say: %s" % self.speechbox.get_text()
-
+            
+        ### Destroy GUI
         def destroy(self, widget):
             print "destroyed"
             Gtk.main_quit()
 
-            ## Key Pressed Event to control Nao remotely
+        ### SVM Preprocessing Functions
+        def takePhoto(self, widget):
+            p.takePhoto()
+            
+        def cropImage(self, widget):
+            p.cropImage()
+
+
+        ### Key Pressed Event to control Nao remotely
         def keyPressed(self, widget, event):
             global headposition
             global protection
-
+            
             key_code = event.get_keycode()[1]
+
             if key_code == 33:  # P Protection On / Off
                     if protection == 0:
                             motion.setExternalCollisionProtectionEnabled( "All", False )
@@ -108,36 +118,44 @@ class NaoController:
                             motion.setExternalCollisionProtectionEnabled( "All", True )
                             protection = 0
                             print "Protection On"
+
             if key_code == 111:  # UP Nao Forward
                     print "Moving Forward..."
                     motion.moveInit()
                     motion.walkTo(0.1, 0, 0)
+
             if key_code == 116: # Down Nao Backward
                     print "Moving Backward..."
                     motion.moveInit()
                     motion.moveTo(-0.1, 0, 0)
+
             if key_code == 113: # Left Nao Left
                     print "Moving Left..."
                     motion.moveInit()
                     motion.moveTo(0, 0.1, 0)
+
             if key_code == 114: # Right Nao Right
                     print "Moving Right..."
                     motion.moveInit()
                     motion.moveTo(0, -0.1, 0)
+
             if key_code == 38: # a Turn Left
                     print "Turning Left..."
                     motion.moveInit()
                     motion.moveTo(0, 0, 1)
+
             if key_code == 40: # d Turn Right
                     print "Turning Right..."
                     motion.moveInit()
                     motion.moveTo(0, 0, -1)
+
             if key_code == 25: # w Head Down
                     headposition = headposition + 0.1
                     motion.angleInterpolation("HeadPitch", headposition, 0.5, True)
                     if headposition > 0.5:
                             headposition = 0.5
                     print "Head Position: %s" % headposition
+
             if key_code == 39: # s Head UP
                     headposition = headposition - 0.1
                     motion.angleInterpolation("HeadPitch", headposition, 0.5, True)
@@ -150,6 +168,3 @@ class NaoController:
         def keyReleased(self, widget, event):
             key_code = event.get_keycode()[1]
             #print "keyReleased: %s" % key_code
-
-        def takePhoto(self, widget):
-           p.showImage()

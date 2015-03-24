@@ -7,8 +7,7 @@ RESOLUTION =  2   # Image Size
 COLORSPACE = 11   # Select RGB
 
 
-
-
 # GUI
 GLADE_FILE_PATH = "ui/nao.glade"
+
 

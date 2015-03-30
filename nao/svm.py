@@ -143,6 +143,19 @@ def path():
             while current in cameFrom:
                 data.append(current)
                 current = cameFrom[current]
+            ## Draws path
+            for i in range(0,len(data)):
+                x = int(data[i:][0][0])
+                y = int(data[i:][0][1])
+                array[x,y] = 4
+                #print x
+                #print y
+            print " "
+            print "##################################################"
+            print "                Area  with PATH                   "
+            print "##################################################"
+            print " "
+            print array
             return data
 
         closeSet.add(current)
@@ -169,8 +182,7 @@ def path():
                 fscore[neighbor] = tentative_g_score + heuristic(neighbor, goal)
                 heappush(oheap, (fscore[neighbor], neighbor))
                 path = heappush(oheap, (fscore[neighbor], neighbor))
-                
-    return False
 
+    return False
     
 # End of A* algorithm 

@@ -107,18 +107,16 @@ def cropImage():
 
 
 def nameChanger():
-    print os.path.dirname(os.path.realpath(__file__))
+
     os.chdir("dataset/negative")
     for i, f in enumerate(glob.glob('*.png')):
       print "%s -> %s.png" % (f, i)
       os.rename(f, "%s.png" % i)
 
-    # print os.path.dirname(os.path.realpath(__file__))
-    # os.chdir("positive")
-    # for i, f in enumerate(glob.glob('*.png')):
-    #   print "%s -> %s.png" % (f, i)
-    #   os.rename(f, "%s.png" % i)
-    # print os.path.dirname(os.path.realpath(__file__))
+    os.chdir("../positive")
+    for i, f in enumerate(glob.glob('*.png')):
+      print "%s -> %s.png" % (f, i)
+      os.rename(f, "%s.png" % i)
 
 
 

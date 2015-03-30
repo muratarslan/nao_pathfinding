@@ -96,7 +96,9 @@ def train():
         else:
             i = 1
         array.append(i)
-    array = split(array,32)
+    array = split(array,32).T
+    #array = np.flipud(array)
+    array = np.fliplr(array)
 
     print " "
     print "Prediction Time : " + str(datetime.datetime.now() - now)
@@ -108,8 +110,6 @@ def train():
     print array
 
     #array[0,0] = 3
-    #print array
-
     return array
     
     
@@ -121,8 +121,8 @@ def heuristic(a, b):
 def path():
     
     array = train()
-    start = (0,0)
-    goal  = (30,21)
+    start = (23,0)
+    goal  = (0,31)
     
     neighbors = [(0,1),(0,-1),(1,0),(-1,0),(1,1),(1,-1),(-1,1),(-1,-1)]
 

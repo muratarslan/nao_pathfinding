@@ -6,6 +6,7 @@ from naoqi import ALProxy
 
 import config as c
 import photo  as p
+import svm
 
 tts        = ALProxy("ALTextToSpeech", c.IP, c.PORT)
 motion     = ALProxy("ALMotion", c.IP, c.PORT)
@@ -100,7 +101,15 @@ class NaoController:
             
         def cropImage(self, widget):
             p.cropImage()
+        
+        def nameChanger(self, widget):
+            p.nameChanger()
+        
+        def drawGrid(self, widget):
+            p.drawGrid()
 
+        def giveMePath(self, widget):
+            svm.path()
 
         ### Key Pressed Event to control Nao remotely
         def keyPressed(self, widget, event):

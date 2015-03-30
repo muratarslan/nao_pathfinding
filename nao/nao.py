@@ -8,3 +8,4 @@ if __name__ == "__main__":
         controller = movement.NaoController()
 	Gtk.main()
 
+# path finding icinde pathfinding
